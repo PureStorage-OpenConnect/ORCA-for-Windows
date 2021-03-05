@@ -28,27 +28,39 @@ ORCA is able to leverage the Ansible Tower and AWX Automation and Orchestration 
 1. User RBAC (RollBack Access Control)
 1. Job Audit and reporting
 
-### ORCA Features
-1. Refresh Mulitple Oracle 19c Databases
-1. Shutdown Oracle 19c Databases
+### ORCA Steps
+1. Create required Oracle directory structure on Windows Servers
+2. Dynamincally create Windows Command, PowerShell and SQL scripts and transfer to target server
+3. Perform crash consistent storage snapshot of source database
+4. Shutdown Target Database
+5. Off-line Windows disks
+6. Overwrite database volumes with snapshot
+7. On-line Window disks
+8. Startup Oracle Database
+9. Rename Oracle database with Oracle NID utility
+10. Rename Operating System database directories and files.
 
 ## Getting Started
 
 ### Prerequisites
 
 ORCA requires the PureStorage Python REST Client, details available at https://pypi.org/project/purestorage/
-
-pip install purestorage
-
+`
+$ pip install purestorage
+`
+Also, install the Pure Storage FlashArray Ansible collection, details available at https://galaxy.ansible.com/purestorage/flasharray
+`
+$ ansible-galaxy collection install purestorage.flasharray
+`
 ### Installation
 
-Download **ORCA** from GitHub and localise vars/database.yaml to required source and target databases.
+Download **ORCA** from GitHub and localise files in vars to required source and target databases etc.
 
 ### Usage
 
-Use from ansible control machine command line or via RedHat Tower / AWX.
+Use from your ansible control machine command line or via RedHat Tower / AWX.
 
-### Database Clone Orginal
+### Database Clone for Windows
 `
 $ ansible-playbook database_clone_win.yaml
 `
