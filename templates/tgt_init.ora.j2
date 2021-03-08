@@ -1,0 +1,76 @@
+###########################################
+# Archive
+###########################################
+log_archive_format=%t_%s_%r.dbf
+
+###########################################
+# Cache and I/O
+###########################################
+db_block_size=8192
+
+###########################################
+# Cursors and Library Cache
+###########################################
+open_cursors=300
+
+###########################################
+# Database Identification
+###########################################
+db_domain=uklab.purestorage.com
+db_name="{{ tgt_db }}"
+
+###########################################
+# File Configuration
+###########################################
+control_files=("E:\oradata\{{ tgt_db }}\control01.ctl", "F:\fast_recovery_area\{{ tgt_db }}\control02.ctl")
+db_recovery_file_dest="F:\fast_recovery_area\{{ tgt_db }}"
+db_recovery_file_dest_size=10g
+
+###########################################
+# Miscellaneous
+###########################################
+compatible=12.2.0
+diagnostic_dest={{ tgt_ob }}
+
+###########################################
+# NLS
+###########################################
+nls_language="ENGLISH"
+nls_territory="UNITED KINGDOM"
+
+###########################################
+# Network Registration
+###########################################
+local_listener=LISTENER_TEST
+
+###########################################
+# Processes and Sessions
+###########################################
+processes=320
+
+###########################################
+# SGA Memory
+###########################################
+sga_target=2457m
+
+###########################################
+# Security and Auditing
+###########################################
+audit_file_dest="{{ tgt_ob }}\admin\{{ tgt_db }}\adump"
+audit_trail=db
+remote_login_passwordfile=EXCLUSIVE
+
+###########################################
+# Shared Server
+###########################################
+dispatchers="(PROTOCOL=TCP) (SERVICE={{ tgt_db }}XDB)"
+
+###########################################
+# Sort, Hash Joins, Bitmap Indexes
+###########################################
+pga_aggregate_target=819m
+
+###########################################
+# System Managed Undo and Rollback Segments
+###########################################
+undo_tablespace=UNDOTBS1

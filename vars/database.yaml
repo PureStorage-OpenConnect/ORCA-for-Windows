@@ -1,0 +1,55 @@
+---
+# Database clone variables
+# 
+src_db: prod
+src_init: "init{{ src_db }}.ora"
+
+tgt_db: test
+tgt_init: "init{{ tgt_db }}.ora"
+tgt_ob: C:\app\oracle
+tgt_oh: "{{ tgt_ob }}\\product\\12.2.0\\dbhome_1"
+tgt_dir: C:\Users\devops\ansible
+# Update Oracle sys password
+sys_pwd: Osmium76
+
+# Set FlashArray names
+array: "{{ se_EMEA_EBC_FA420 }}"
+source: "{{ sourceVol }}"
+target: "{{ targetVol }}"
+volmap: "{{ tgtmap }}"
+dirmap: "{{ tgtdir }}"
+
+# Set to source Protection Group name
+sourceName: z-re-ora-dev1PG
+
+#Source database volumes
+sourcePG: 
+- z-re-ora-dev1PG
+
+sourceVol:
+- z-re-ora-dev1-E
+- z-re-ora-dev1-F
+
+#Target database volume mappings
+#Update to reflect local database structure
+tgtmap:
+  vol1:
+    source:  z-re-ora-dev1-E
+    target:  z-re-ora-dev2-E
+  vol2:
+    source:  z-re-ora-dev1-F
+    target:  z-re-ora-dev2-F
+
+#Target directory layout
+#Update as required
+tgtdir:
+  dir1:
+    sourced: "E:\\oradata\\{{ src_db }}"
+    targetd: "{{ tgt_db }}"
+  dir2:
+    sourced: "F:\\fast_recovery_area\\{{ src_db }}"
+    targetd: "{{ tgt_db }}"
+  dir3:
+    sourced: "F:\\fast_recovery_area\\{{ tgt_db }}\\{{ src_db }}"
+    targetd: "{{ tgt_db }}"
+

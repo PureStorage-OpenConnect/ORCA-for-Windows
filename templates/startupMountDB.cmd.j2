@@ -1,0 +1,4 @@
+SET ORACLE_SID={{ src_db }}
+SET ORACLE_HOME={{ tgt_oh }}
+
+sqlplus  sys/{{ sys_pwd }}  as sysdba @{{ tgt_dir}}\startup.sql

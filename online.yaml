@@ -1,0 +1,22 @@
+---
+#######################################################
+# Online Powershell Test
+- name:  Online PowerShell Test
+  hosts: z-re-ora-dev2
+  gather_facts: no
+  vars_files:
+    - vars/ps.yaml
+
+  tasks:
+
+#Set-up
+    - name: Copy PowerShell 'Online' script
+      win_copy: src=files/online.ps1 dest={{ tgt_dir }}\online.ps1
+
+
+# use ansible shell module
+    - name: Execute Online PowerShell script
+      win_command: powershell.exe -ExecutionPolicy ByPass -File {{ tgt_dir }}\online.ps1 
+      register: out
+
+    - debug: var=out.stdout_lines

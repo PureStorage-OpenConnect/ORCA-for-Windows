@@ -1,0 +1,4 @@
+SET ORACLE_SID={{ src_db }}
+SET ORACLE_HOME={{ tgt_oh }}
+
+{{ tgt_oh }}\bin\nid TARGET=sys/{{ sys_pwd }}@{{ src_db }} DBNAME={{ tgt_db }}  LOGFILE={{ tgt_dir}}\change_dbname.log

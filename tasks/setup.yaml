@@ -1,0 +1,38 @@
+---    
+# Target database server setup
+- name: Copy PowerShell 'Offline' script
+  win_copy: src=files/offline.ps1 dest={{ tgt_dir }}\\offline.ps1
+#
+- name: Copy PowerShell 'Online' script
+  win_copy: src=files/online.ps1 dest={{ tgt_dir }}\\online.ps1
+#
+- name: Copy rename database files sql
+  template: src=templates/rename.sql.j2 dest={{ tgt_dir }}\\rename.sql
+#
+- name: Copy database startup Mount script to target database server
+  template: src=templates/startupMountDB.cmd.j2 dest={{ tgt_dir }}\\startupMountDB.cmd
+#
+- name: Copy database startup Mount sql to target database server
+  template: src=templates/startup.sql.j2 dest={{ tgt_dir }}\\startup.sql
+#
+- name: Copy database shutdown script to target database server
+  template: src=templates/shutdownDB.cmd.j2 dest={{ tgt_dir }}\\shutdownDB.cmd
+#
+- name: Copy database shutdown sql to target database server
+  win_copy: src=files/shutdown.sql dest={{ tgt_dir }}\\shutdown.sql
+#
+- name: Copy database rename script to target database server
+  win_template: src=templates/dbnewid.cmd.j2 dest={{ tgt_dir}}\\dbnewid.cmd
+#
+- name: Copy database rename files script to target database server
+  win_template: src=templates/rendbfiles.cmd.j2 dest={{ tgt_dir}}\\rendbfiles.cmd
+#
+- name: Copy database rename files sql to target database server
+  win_template: src=templates/rendbfiles.sql.j2 dest={{ tgt_dir}}\\rendbfiles.sql
+#
+- name: Copy database source init.ora files to target database server
+  win_template: src=templates/src_init.ora.j2 dest={{ tgt_ob }}\\admin\\{{ src_db }}\\pfile\\init{{ src_db }}.ora
+#
+- name: Copy database target init.ora files to target database server
+  win_template: src=templates/tgt_init.ora.j2 dest={{ tgt_ob }}\\admin\\{{ tgt_db }}\\pfile\\init{{ tgt_db }}.ora 
+#  

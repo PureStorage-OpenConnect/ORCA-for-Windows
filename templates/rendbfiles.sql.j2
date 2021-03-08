@@ -1,0 +1,4 @@
+startup mount pfile='{{ tgt_ob }}\admin\{{ tgt_db }}\pfile\{{ tgt_init }}
+@rename_files.sql
+alter database open resetlogs;
+exit;

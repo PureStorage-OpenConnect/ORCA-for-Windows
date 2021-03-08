@@ -1,0 +1,14 @@
+---
+# Startup source database
+- name: startup as source database name
+  win_command: startupMountDB.cmd
+  args:
+    chdir: "{{ tgt_dir }}"
+  become: yes
+  become_method: runas
+  become_user: Administrator
+  register: out
+
+- debug: 
+    var: out.stdout_lines
+    verbosity: 1

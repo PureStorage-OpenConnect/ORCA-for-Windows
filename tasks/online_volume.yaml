@@ -1,0 +1,9 @@
+---
+# Online volumes
+- name: online target database volumes
+  win_command: powershell.exe -ExecutionPolicy ByPass -File {{ tgt_dir }}\online.ps1 
+  register: out
+
+- debug: 
+    var: out.stdout_lines
+    verbosity: 1

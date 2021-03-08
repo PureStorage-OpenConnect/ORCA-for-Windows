@@ -1,0 +1,14 @@
+---
+# Rename database files
+- name: Rename database name
+  win_command: rendbfiles.cmd
+  args:
+    chdir: "{{ tgt_dir }}"
+  become: yes
+  become_method: runas
+  become_user: Administrator
+  register: out
+
+- debug: 
+    var: out.stdout_lines
+    verbosity: 1

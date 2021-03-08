@@ -1,0 +1,14 @@
+---
+# Rename source database
+- name: rename source database
+  win_command: dbnewid.cmd
+  args:
+    chdir: "{{ tgt_dir }}"
+  become: yes
+  become_method: runas
+  become_user: Administrator
+  register: out
+
+- debug: 
+    var: out
+    verbosity: 1

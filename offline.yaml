@@ -1,0 +1,22 @@
+---
+#######################################################
+# Offline Powershell Test
+- name:  Offline PowerShell Test
+  hosts: z-re-ora-dev2
+  gather_facts: no
+  vars_files:
+    - vars/ps.yaml
+
+  tasks:
+
+#Set-up
+    - name: Copy PowerShell 'Offline' script
+      win_copy: src=files/offline.ps1 dest={{ tgt_dir }}\offline.ps1
+
+
+# use ansible shell module
+    - name: Execute Offline PowerShell script
+      win_command: powershell.exe -ExecutionPolicy ByPass -File {{ tgt_dir }}\offline.ps1 
+      register: out
+
+    - debug: var=out.stdout_lines

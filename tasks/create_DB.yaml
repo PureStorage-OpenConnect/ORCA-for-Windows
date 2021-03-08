@@ -1,0 +1,12 @@
+---
+# Create target database
+- name: create target database
+  win_command: powershell.exe -ExecutionPolicy ByPass -File {{ tgt_dir }}\createDB.ps1 
+  become: yes
+  become_method: runas
+  become_user: Administrator
+  register: out
+
+- debug: 
+    var: out.stdout_lines
+    verbosity: 1

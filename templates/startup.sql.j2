@@ -1,0 +1,7 @@
+startup pfile='{{ tgt_ob }}\admin\{{ src_db }}\pfile\{{ src_init }}'
+alter system switch logfile;
+@rename.sql
+shutdown immediate;
+startup mount pfile='{{ tgt_ob }}\admin\{{ src_db }}\pfile\{{ src_init }}'
+exit
+
